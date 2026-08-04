@@ -46,7 +46,7 @@ const Hero = () => {
               <select className="border border-gray-300 rounded-sm p-1">
                 <option>Select Options</option>
                 <option>Bali</option>
-                <option>India</option>
+                <option>Pakistan</option>
                 <option>Tokyo</option>
                 <option>Venice</option>
                 <option>Paris</option>
