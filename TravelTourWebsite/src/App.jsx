@@ -3,7 +3,6 @@ import NavBar from "./Components/NavBar/NavBar";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Pages/Home";
 import Tours from "./Pages/Tours";
-import Gallery from "./Pages/Gallery";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Footer from "./Components/Footer";
@@ -12,23 +11,19 @@ import ScrollToTop from "react-scroll-to-top";
 const router = createBrowserRouter([
   {
     path:'/',
-    element: <><Navbar/><Home/><Footer/></>
+    element: <><NavBar/><Home/><Footer/></>
   },
   {
     path:'/tours',
-    element: <><Navbar/><Tours/><Footer/></>
-  },
-  {
-    path:'/gallery',
-    element: <><Navbar/><Gallery/><Footer/></>
+    element: <><NavBar/><Tours/><Footer/></>
   },
   {
     path:'/about',
-    element: <><Navbar/><About/><Footer/></>
+    element: <><NavBar/><About/><Footer/></>
   },
   {
     path:'/contact',
-    element: <><Navbar/><Contact/><Footer/></>
+    element: <><NavBar/><Contact/><Footer/></>
   },
 ])
 
