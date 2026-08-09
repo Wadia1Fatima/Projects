@@ -10,6 +10,7 @@ import './styles.css'
     const [selected, setSelected] = useState(null);
     const [enableMultiSelection, setEnableMultiSelection] = useState(false);
     const [multiple, setMultiple] = useState([]);
+    let buttonText = "Enable MultiSelection";
 
     function handleSingleSelection(getCurrentId){
         setSelected(getCurrentId === selected ? null : getCurrentId);
@@ -25,13 +26,14 @@ import './styles.css'
         setMultiple(copyMulti)
     }
 
+    enableMultiSelection ? buttonText = "Disable MultiSelection" : buttonText = "Enable MultiSelection"
 
     console.log(selected, multiple);
     return (
         <div className='wrapper'>
             <h1 className="text-black-4xl">Accordian</h1>
             <button onClick={() => setEnableMultiSelection(!enableMultiSelection)}>
-                Enable MultiSelection
+                {buttonText}
             </button>
             <div className='accordian'>
                 {
@@ -51,6 +53,12 @@ import './styles.css'
                             ? multiple.indexOf(dataItem.id) !== -1 && <div className='content'>{dataItem.answer}</div>
                             : selected === dataItem.id && <div className='content'>{dataItem.answer}</div>
                         }
+                        {/* {
+                            selected === dataItem.id || multiple.indexOf(dataItem.id) !== -1
+                            ? <div className='content'>{dataItem.answer}</div>
+                            : null
+                        } */}
+
                     </div>)
                     : <div>No Data Found</div>
                 }
