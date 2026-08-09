@@ -9,9 +9,9 @@ export default function ClrGenerator(){
 
 
     return(
-        <div className="container" style = {{background: 'color'}}>
+        <div className="container" style = {{background: color}}>
             <h1>Generate Random Color</h1>
-            <div>
+            <div className="buttons">
                 <button>HEX color</button>
                 <button>RGB color</button>
                 <button>Generate Color</button>
