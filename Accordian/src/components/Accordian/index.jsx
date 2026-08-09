@@ -15,7 +15,14 @@ import './styles.css'
         setSelected(getCurrentId === selected ? null : getCurrentId);
     }
     function handleMultiSelection(getCurrentId){
-        setSelected(getCurrentId === selected ? null : getCurrentId);
+        let copyMulti = [...multiple]
+        const findIndexOfCurrentId = copyMulti.indexOf(getCurrentId)
+
+        console.log(findIndexOfCurrentId)
+        if(findIndexOfCurrentId === -1) copyMulti.push(getCurrentId)
+        else copyMulti.splice(findIndexOfCurrentId, 1)
+
+        setMultiple(copyMulti)
     }
 
 
@@ -30,14 +37,19 @@ import './styles.css'
                 {
                     data && data.length > 0 ? 
                     data.map(dataItem => <div className='item'>
-                        <div onClick = {enableMultiSelection ?() => handleMultiSelection (dataItem.id) : () => handleSingleSelection(dataItem.id)} className='title'>
+                        <div onClick = {
+                            enableMultiSelection 
+                            ? () => handleMultiSelection (dataItem.id) 
+                            : () => handleSingleSelection(dataItem.id)
+                          } 
+                        className='title'>
                             <h3>{dataItem.question}</h3>
                             <span>+</span>
                         </div>
                         {
-                            selected === dataItem.id ? 
-                            <div className='content'>{dataItem.answer}</div>
-                            : null
+                            enableMultiSelection 
+                            ? multiple.indexOf(dataItem.id) !== -1 && <div className='content'>{dataItem.answer}</div>
+                            : selected === dataItem.id && <div className='content'>{dataItem.answer}</div>
                         }
                     </div>)
                     : <div>No Data Found</div>
