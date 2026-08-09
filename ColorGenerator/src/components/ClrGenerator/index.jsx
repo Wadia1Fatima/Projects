@@ -1,4 +1,5 @@
 import { useState } from "react"
+import './style.css'
 
 
 export default function ClrGenerator(){
@@ -8,22 +9,13 @@ export default function ClrGenerator(){
 
 
     return(
-        <div 
-            style={
-                {
-                    display: 'flex',
-                    gap: '10px',
-                    padding: '30px',
-                    width: '100%',
-                    heigth: '100%',
-                    background: 'color'
-                }
-            }
-        >
+        <div className="container" style = {{background: 'color'}}>
             <h1>Generate Random Color</h1>
-            <button>HEX color</button>
-            <button>RGB color</button>
-            <button>Generate Color</button>
+            <div>
+                <button>HEX color</button>
+                <button>RGB color</button>
+                <button>Generate Color</button>
+            </div>
         </div>
     )
 }
