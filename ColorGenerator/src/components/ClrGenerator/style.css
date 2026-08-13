@@ -1,29 +1,115 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 20px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 50px;
-    width: 100vw;
-    height: 100vh;
+    gap: 24px;
+
+    transition: background-color 0.3s ease;
 }
 
-h1, h3 {
-    font-size: 25px;
-    font-weight: bold;
+.container h1 {
+    margin: 0;
+    padding: 14px 24px;
+
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+
+    backdrop-filter: blur(8px);
 }
 
-.container .buttons {
+.buttons {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
+    flex-wrap: wrap;
 }
- 
-button{
-    border: 1px solid #000;
-    border-radius: 15px;
-    padding: 8px;
-    background-color:rgb(207, 226, 243);
+
+.buttons button {
+    padding: 11px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.9);
+    color: #1f2937;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition: all 0.2s ease;
+}
+
+.buttons button:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.18);
+}
+
+.buttons button:active {
+    transform: translateY(0);
+}
+
+.container > div:last-child {
+    min-width: 240px;
+    padding: 18px 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+
+    backdrop-filter: blur(8px);
+}
+
+.container h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 15px;
+    }
+
+    .container h1 {
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .buttons button {
+        width: 200px;
+    }
 }
