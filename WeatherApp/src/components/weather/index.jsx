@@ -24,7 +24,7 @@ export default function Weather() {
     }
   }
 
-  function getCurrentDate(){
+  function getCurrentDate() {
     return new Date().toLocaleString('en-us', {
       weekday: 'long',
       month: 'long',
@@ -33,13 +33,15 @@ export default function Weather() {
     })
   }
 
-  function handleSearch() {    
+  async function handleSearch() {
     setLoading(true);
     fetchWeatherData(search);
   }
 
   useEffect(() => {
-    fetchWeatherData('lahore');
+    setTimeout(() => {
+        fetchWeatherData("lahore");
+    }, 0);
   }, []);
 
   console.log(weatherData);
@@ -52,9 +54,9 @@ export default function Weather() {
         handleSearch={handleSearch}
       />
       {
-        loading 
-        ? <div>Loading....</div>
-        : <div className="weather-content">
+        loading
+          ? <div>Loading....</div>
+          : <div className="weather-content">
             <div className="city">
               <h2>
                 {weatherData?.name}, <span>{weatherData?.sys.country}</span>
@@ -71,7 +73,7 @@ export default function Weather() {
               }
             </div>
             <p className="description">
-              { weatherData && weatherData.weather && weatherData.weather[0] ? weatherData.weather[0].description : '' }
+              {weatherData && weatherData.weather && weatherData.weather[0] ? weatherData.weather[0].description : ''}
             </p>
             <div className="weather-info">
               <div className="feature">
