@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import data from './data';
 import './styles.css'
-// Two Types of Accordian 
-//  Single Selection
-//  Multiple Selection
+// Two Types of Accordion 
+// Single Selection
+// Multiple Selection
  
- export default function Accordian(){
+ export default function Accordion(){
 
     const [selected, setSelected] = useState(null);
     const [enableMultiSelection, setEnableMultiSelection] = useState(false);
@@ -31,11 +31,11 @@ import './styles.css'
     console.log(selected, multiple);
     return (
         <div className='wrapper'>
-            <h1 className="text-black-4xl">Accordian</h1>
+            <h1 className="text-black-4xl">Accordion</h1>
             <button onClick={() => setEnableMultiSelection(!enableMultiSelection)}>
                 {buttonText}
             </button>
-            <div className='accordian'>
+            <div className='accordion'>
                 {
                     data && data.length > 0 ? 
                     data.map(dataItem => <div className='item'>

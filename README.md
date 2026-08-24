@@ -558,3 +558,67 @@ I practiced:
 **Complete**
 
 </details>
+
+
+<details>
+<summary><h2>Mini Store</h2></summary>
+
+### Overview
+
+A modern product store built with **React.js**, demonstrating state management using **Context API** and **Redux Toolkit**. The application allows users to browse products fetched from an external API, add products to a shopping cart, manage quantities, and switch between light and dark themes.
+
+### Light Theme
+
+<img src="./Assets/Mini Store.png" alt="Mini Store" width="800"/>
+
+### Dark Theme
+
+<img src="./Assets/Mini Store - DarkTheme.png" alt="Mini Store" width="800"/>
+
+### Features
+
+- Fetches products from an external API
+- Product listing with reusable components
+- Add products to the shopping cart
+- Increase and decrease product quantities
+- Remove products from the cart
+- Displays the total cart price
+- Light and dark theme toggle
+- Shared theme state using Context API
+- Global application state using Redux Toolkit
+- Asynchronous API handling using `createAsyncThunk`
+
+### Technologies Used
+
+- React.js
+- Redux Toolkit
+- React Redux
+- Context API
+- JavaScript
+- CSS
+- Vite
+- Fake Store API
+
+### Concepts Practiced
+
+- Components and Props
+- `useState`
+- `useEffect`
+- Context API
+- `useContext`
+- Redux Store
+- Redux Slices
+- Actions and Reducers
+- `useSelector`
+- `useDispatch`
+- `createAsyncThunk`
+- API Integration
+- Global State Management
+- Asynchronous State Management
+
+
+### Status
+
+**Complete**
+
+</details>
