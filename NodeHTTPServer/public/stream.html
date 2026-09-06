@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stream Viewer | NodeServer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <nav>
+
+        <div class="logo">
+            Node<span>Server</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+            <a href="/read">Read</a>
+            <a href="/edit">Edit</a>
+            <a href="/stream">Stream</a>
+            <a href="/logs">Logs</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <main class="container">
+
+
+        <section class="page-header">
+
+            <div class="badge">
+                NODE.JS STREAMS
+            </div>
+
+
+            <h1>
+                Stream Viewer
+            </h1>
+
+
+            <p class="subtitle">
+
+                Read message.txt using a
+                Node.js Readable Stream.
+
+            </p>
+
+        </section>
+
+
+
+        <div class="info-grid">
+
+
+            <div class="info">
+
+                <span>FILE</span>
+
+                <strong id="file">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <span>TYPE</span>
+
+                <strong id="streamType">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <span>ENCODING</span>
+
+                <strong id="encoding">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <span>CHUNKS</span>
+
+                <strong id="chunks">
+                    —
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <section class="card">
+
+
+            <h2>
+                Streamed Content
+            </h2>
+
+
+            <div id="content" class="content-box">
+
+                Loading stream...
+
+            </div>
+
+
+            <div id="status" class="status"></div>
+
+
+            <button onclick="loadStream()">
+
+                Read Stream Again
+
+            </button>
+
+
+        </section>
+
+
+
+        <section class="card">
+
+
+            <h2>
+                How it works
+            </h2>
+
+
+            <p>
+
+                The server creates a readable stream
+                using <strong>fs.createReadStream()</strong>.
+                Data is received through the
+                <strong>data</strong> event and the
+                process finishes when the
+                <strong>end</strong> event occurs.
+
+            </p>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer>
+
+        fs.createReadStream() · Readable Stream
+
+    </footer>
+
+
+
+    <script>
+
+
+        async function loadStream() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/stream"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.success) {
+
+
+                    document.getElementById(
+                        "file"
+                    ).textContent =
+                        data.file;
+
+
+                    document.getElementById(
+                        "streamType"
+                    ).textContent =
+                        data.streamType;
+
+
+                    document.getElementById(
+                        "encoding"
+                    ).textContent =
+                        data.encoding;
+
+
+                    document.getElementById(
+                        "chunks"
+                    ).textContent =
+                        data.chunks;
+
+
+                    document.getElementById(
+                        "content"
+                    ).textContent =
+                        data.content;
+
+
+                    const status =
+                        document.getElementById(
+                            "status"
+                        );
+
+
+                    status.style.display =
+                        "block";
+
+
+                    status.textContent =
+                        "✓ Stream completed successfully";
+
+                }
+
+            }
+
+            catch (error) {
+
+                document.getElementById(
+                    "content"
+                ).textContent =
+                    "Could not connect to server.";
+
+            }
+
+        }
+
+
+        loadStream();
+
+    </script>
+
+
+</body>
+
+</html>

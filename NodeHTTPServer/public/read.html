@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Read File | NodeServer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <nav>
+
+        <div class="logo">
+            Node<span>Server</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+            <a href="/read">Read</a>
+            <a href="/edit">Edit</a>
+            <a href="/stream">Stream</a>
+            <a href="/logs">Logs</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <main class="container">
+
+
+        <section class="page-header">
+
+            <div class="badge">
+                FILE SYSTEM
+            </div>
+
+
+            <h1>
+                Read File
+            </h1>
+
+
+            <p class="subtitle">
+
+                Read the contents of message.txt
+                directly from the server.
+
+            </p>
+
+        </section>
+
+
+
+        <section class="card">
+
+
+            <h2>
+                message.txt
+            </h2>
+
+
+            <div id="fileContent" class="content-box">
+
+                Reading file...
+
+            </div>
+
+
+            <div id="status" class="status"></div>
+
+
+            <button onclick="readFile()">
+
+                Refresh File
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer>
+
+        fs.readFile() · Node.js File System
+
+    </footer>
+
+
+
+    <script>
+
+        async function readFile() {
+
+            const contentBox =
+                document.getElementById(
+                    "fileContent"
+                );
+
+            const status =
+                document.getElementById(
+                    "status"
+                );
+
+
+            contentBox.textContent =
+                "Reading file...";
+
+
+            try {
+
+                const response =
+                    await fetch("/api/read");
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.success) {
+
+                    contentBox.textContent =
+                        data.content;
+
+
+                    status.style.display =
+                        "block";
+
+
+                    status.textContent =
+                        "✓ File read successfully";
+
+                }
+
+                else {
+
+                    contentBox.textContent =
+                        data.message;
+
+                }
+
+            }
+
+            catch (error) {
+
+                contentBox.textContent =
+                    "Could not connect to server.";
+
+            }
+
+        }
+
+
+        readFile();
+
+    </script>
+
+
+</body>
+
+</html>

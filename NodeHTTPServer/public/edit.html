@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit File | NodeServer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <nav>
+
+        <div class="logo">
+            Node<span>Server</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+            <a href="/read">Read</a>
+            <a href="/edit">Edit</a>
+            <a href="/stream">Stream</a>
+            <a href="/logs">Logs</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <main class="container">
+
+
+        <section class="page-header">
+
+            <div class="badge">
+                FILE SYSTEM
+            </div>
+
+
+            <h1>
+                Edit File
+            </h1>
+
+
+            <p class="subtitle">
+
+                Modify or add content to message.txt
+                using the Node.js fs module.
+
+            </p>
+
+        </section>
+
+
+
+        <section class="card">
+
+
+            <h2>
+                Replace File Contents
+            </h2>
+
+
+            <p>
+
+                Edit the complete contents
+                of the file below.
+
+            </p>
+
+
+            <textarea id="fileContent" placeholder="Loading file..."></textarea>
+
+
+            <button onclick="saveFile()">
+
+                Save Changes
+
+            </button>
+
+
+            <div id="saveStatus" class="status"></div>
+
+
+        </section>
+
+
+
+        <section class="card">
+
+
+            <h2>
+                Add New Text
+            </h2>
+
+
+            <p>
+
+                Add additional text without
+                deleting the existing content.
+
+            </p>
+
+
+            <textarea id="appendContent" placeholder="Write something to add to the file..."
+                style="min-height: 150px;"></textarea>
+
+
+            <button onclick="appendFile()">
+
+                Add to File
+
+            </button>
+
+
+            <div id="appendStatus" class="status"></div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer>
+
+        fs.writeFile() · fs.appendFile()
+
+    </footer>
+
+
+
+    <script>
+
+
+        async function loadFile() {
+
+            const textarea =
+                document.getElementById(
+                    "fileContent"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch("/api/read");
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.success) {
+
+                    textarea.value =
+                        data.content;
+
+                }
+
+            }
+
+            catch (error) {
+
+                textarea.value =
+                    "Could not load file.";
+
+            }
+
+        }
+
+
+
+        async function saveFile() {
+
+            const content =
+                document.getElementById(
+                    "fileContent"
+                ).value;
+
+
+            const status =
+                document.getElementById(
+                    "saveStatus"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/write",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                content: content
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                status.style.display =
+                    "block";
+
+
+                status.textContent =
+                    data.success
+                        ? "✓ File updated successfully"
+                        : data.message;
+
+            }
+
+            catch (error) {
+
+                status.style.display =
+                    "block";
+
+
+                status.textContent =
+                    "Could not connect to server.";
+
+            }
+
+        }
+
+
+
+        async function appendFile() {
+
+            const content =
+                document.getElementById(
+                    "appendContent"
+                ).value;
+
+
+            const status =
+                document.getElementById(
+                    "appendStatus"
+                );
+
+
+            if (!content.trim()) {
+
+                status.style.display =
+                    "block";
+
+
+                status.textContent =
+                    "Please enter some text first.";
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/append",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                content: content
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                status.style.display =
+                    "block";
+
+
+                status.textContent =
+                    data.success
+                        ? "✓ Text added to file"
+                        : data.message;
+
+
+                if (data.success) {
+
+                    document.getElementById(
+                        "appendContent"
+                    ).value = "";
+
+
+                    loadFile();
+
+                }
+
+            }
+
+            catch (error) {
+
+                status.style.display =
+                    "block";
+
+
+                status.textContent =
+                    "Could not connect to server.";
+
+            }
+
+        }
+
+
+        loadFile();
+
+    </script>
+
+
+</body>
+
+</html>

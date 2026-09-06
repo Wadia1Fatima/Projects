@@ -1,0 +1,6 @@
+Welcome to my Node.js server!
+
+This text is stored inside message.txt.
+
+You can read this file, update its contents,
+append new text, and view it through a readable stream.

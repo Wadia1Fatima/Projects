@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Server Logs | NodeServer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <nav>
+
+        <div class="logo">
+            Node<span>Server</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+            <a href="/read">Read</a>
+            <a href="/edit">Edit</a>
+            <a href="/stream">Stream</a>
+            <a href="/logs">Logs</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <main class="container">
+
+
+        <section class="page-header">
+
+            <div class="badge">
+                SERVER ACTIVITY
+            </div>
+
+
+            <h1>
+                Server Logs
+            </h1>
+
+
+            <p class="subtitle">
+
+                Every request handled by the
+                Node.js server is recorded here.
+
+            </p>
+
+        </section>
+
+
+
+        <section class="card">
+
+
+            <h2>
+                Activity Log
+            </h2>
+
+
+            <br>
+
+
+            <div id="logs" class="log-box">
+
+                Loading logs...
+
+            </div>
+
+
+            <br>
+
+
+            <button onclick="loadLogs()">
+
+                Refresh Logs
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer>
+
+        fs.appendFile() · Server Logging
+
+    </footer>
+
+
+
+    <script>
+
+
+        async function loadLogs() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/logs"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.success) {
+
+                    document.getElementById(
+                        "logs"
+                    ).textContent =
+                        data.logs ||
+                        "No logs yet.";
+
+                }
+
+            }
+
+            catch (error) {
+
+                document.getElementById(
+                    "logs"
+                ).textContent =
+                    "Could not load logs.";
+
+            }
+
+        }
+
+
+        loadLogs();
+
+    </script>
+
+
+</body>
+
+</html>
